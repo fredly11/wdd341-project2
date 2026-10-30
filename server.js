@@ -8,6 +8,8 @@ const { initDb } = require('./db/connect');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.set('trust proxy', 1);
+
 app.use(cors());
 app.use(express.json());
 
@@ -21,7 +23,25 @@ try {
 }
 
 if (swaggerDocument) {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.get('/api-docs.json', (req, res) => {
+    const runtimeSwaggerDoc = {
+      ...swaggerDocument,
+      host: req.get('host'),
+      schemes: [req.protocol]
+    };
+
+    res.json(runtimeSwaggerDoc);
+  });
+
+  app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(null, {
+      swaggerOptions: {
+        url: '/api-docs.json'
+      }
+    })
+  );
 }
 
 app.get('/', (req, res) => {
