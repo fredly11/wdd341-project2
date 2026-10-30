@@ -47,7 +47,7 @@ DELETE {{localUrl}}/businesses/{{businessId}}
 ### ---------------------------------
 ### Render requests (replace placeholder)
 ### ---------------------------------
-@renderUrl = https://RENDER_URL
+@renderUrl = https://wdd341-project2-wsi4.onrender.com
 @renderBusinessId = 000000000000000000000000
 
 ### GET all businesses
