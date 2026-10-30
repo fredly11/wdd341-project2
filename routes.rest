@@ -1,0 +1,90 @@
+### ---------------------------------
+### Localhost requests (PORT 3000)
+### ---------------------------------
+@localUrl = http://localhost:3000
+@businessId = 000000000000000000000000
+
+### GET all businesses
+GET {{localUrl}}/businesses
+
+### GET business by id
+GET {{localUrl}}/businesses/{{businessId}}
+
+### POST create business
+POST {{localUrl}}/businesses
+Content-Type: application/json
+
+{
+  "name": "Sunrise Bakery",
+  "ownerName": "Jamie Lopez",
+  "businessType": "LLC",
+  "state": "ID",
+  "einStatus": "Approved",
+  "startDate": "2026-08-01",
+  "industry": "Food & Beverage",
+  "notes": "Planning first storefront launch in Boise."
+}
+
+### PUT update business
+PUT {{localUrl}}/businesses/{{businessId}}
+Content-Type: application/json
+
+{
+  "name": "Sunrise Bakery Co.",
+  "ownerName": "Jamie Lopez",
+  "businessType": "LLC",
+  "state": "ID",
+  "einStatus": "Approved",
+  "startDate": "2026-08-01",
+  "industry": "Food & Beverage",
+  "notes": "Updated notes after investor meeting."
+}
+
+### DELETE business
+DELETE {{localUrl}}/businesses/{{businessId}}
+
+
+### ---------------------------------
+### Render requests (replace placeholder)
+### ---------------------------------
+@renderUrl = https://RENDER_URL
+@renderBusinessId = 000000000000000000000000
+
+### GET all businesses
+GET {{renderUrl}}/businesses
+
+### GET business by id
+GET {{renderUrl}}/businesses/{{renderBusinessId}}
+
+### POST create business
+POST {{renderUrl}}/businesses
+Content-Type: application/json
+
+{
+  "name": "Sunrise Bakery",
+  "ownerName": "Jamie Lopez",
+  "businessType": "LLC",
+  "state": "ID",
+  "einStatus": "Approved",
+  "startDate": "2026-08-01",
+  "industry": "Food & Beverage",
+  "notes": "Planning first storefront launch in Boise."
+}
+
+### PUT update business
+PUT {{renderUrl}}/businesses/{{renderBusinessId}}
+Content-Type: application/json
+
+{
+  "name": "Sunrise Bakery Co.",
+  "ownerName": "Jamie Lopez",
+  "businessType": "LLC",
+  "state": "ID",
+  "einStatus": "Approved",
+  "startDate": "2026-08-01",
+  "industry": "Food & Beverage",
+  "notes": "Updated notes after investor meeting."
+}
+
+### DELETE business
+DELETE {{renderUrl}}/businesses/{{renderBusinessId}}
