@@ -12,6 +12,16 @@
     "https"
   ],
   "paths": {
+    "/api-docs.json": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "description": "",
@@ -104,6 +114,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
           "204": {
             "description": "No Content"
           },
@@ -131,6 +147,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request"
@@ -167,7 +189,7 @@
         },
         "einStatus": {
           "type": "string",
-          "example": "Approved"
+          "example": "approved"
         },
         "startDate": {
           "type": "string",

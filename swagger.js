@@ -85,6 +85,8 @@ const doc = {
           }
         ],
         responses: {
+          200: { description: 'OK' },
+          201: { description: 'Created' },
           204: { description: 'No Content' },
           400: { description: 'Bad Request' },
           404: { description: 'Not Found' },
@@ -104,6 +106,8 @@ const doc = {
         ],
         responses: {
           200: { description: 'OK' },
+          201: { description: 'Created' },
+          204: { description: 'No Content' },
           400: { description: 'Bad Request' },
           404: { description: 'Not Found' },
           500: { description: 'Internal Server Error' }
@@ -117,7 +121,7 @@ const doc = {
       ownerName: 'Jamie Lopez',
       businessType: 'LLC',
       state: 'ID',
-      einStatus: 'Approved',
+      einStatus: 'approved',
       startDate: '2026-08-01',
       industry: 'Food & Beverage',
       notes: 'Planning first storefront launch in Boise.'
@@ -146,6 +150,22 @@ swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
         ...businessSchemaRef
       }
     ];
+
+    postPath.responses = {
+      201: { description: 'Created' },
+      400: { description: 'Bad Request' },
+      500: { description: 'Internal Server Error' }
+    };
+  }
+
+  const getByIdPath = swagger.paths?.['/businesses/{id}']?.get;
+  if (getByIdPath) {
+    getByIdPath.responses = {
+      200: { description: 'OK' },
+      400: { description: 'Bad Request' },
+      404: { description: 'Not Found' },
+      500: { description: 'Internal Server Error' }
+    };
   }
 
   const putPath = swagger.paths?.['/businesses/{id}']?.put;
@@ -166,6 +186,27 @@ swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
         ...businessSchemaRef
       }
     ];
+
+    putPath.responses = {
+      200: { description: 'OK' },
+      201: { description: 'Created' },
+      204: { description: 'No Content' },
+      400: { description: 'Bad Request' },
+      404: { description: 'Not Found' },
+      500: { description: 'Internal Server Error' }
+    };
+  }
+
+  const deletePath = swagger.paths?.['/businesses/{id}']?.delete;
+  if (deletePath) {
+    deletePath.responses = {
+      200: { description: 'OK' },
+      201: { description: 'Created' },
+      204: { description: 'No Content' },
+      400: { description: 'Bad Request' },
+      404: { description: 'Not Found' },
+      500: { description: 'Internal Server Error' }
+    };
   }
 
   fs.writeFileSync(swaggerPath, JSON.stringify(swagger, null, 2));

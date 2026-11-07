@@ -1,29 +1,6 @@
 const { ObjectId } = require('mongodb');
 const { getDb } = require('../db/connect');
 
-const requiredFields = [
-  'name',
-  'ownerName',
-  'businessType',
-  'state',
-  'einStatus',
-  'startDate',
-  'industry',
-  'notes'
-];
-
-const validateBusiness = (payload) => {
-  const missingFields = requiredFields.filter(
-    (field) => payload[field] === undefined || payload[field] === null || payload[field] === ''
-  );
-
-  if (missingFields.length > 0) {
-    return `Missing required fields: ${missingFields.join(', ')}`;
-  }
-
-  return null;
-};
-
 const buildBusinessPayload = (body) => ({
   name: body.name,
   ownerName: body.ownerName,
@@ -49,10 +26,6 @@ const getBusinessById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!ObjectId.isValid(id)) {
-      return res.status(400).json({ message: 'Invalid business id.' });
-    }
-
     const db = getDb();
     const business = await db.collection('businesses').findOne({ _id: new ObjectId(id) });
 
@@ -68,11 +41,6 @@ const getBusinessById = async (req, res) => {
 
 const createBusiness = async (req, res) => {
   try {
-    const validationMessage = validateBusiness(req.body);
-    if (validationMessage) {
-      return res.status(400).json({ message: validationMessage });
-    }
-
     const db = getDb();
     const businessPayload = buildBusinessPayload(req.body);
     const result = await db.collection('businesses').insertOne(businessPayload);
@@ -86,15 +54,6 @@ const createBusiness = async (req, res) => {
 const updateBusiness = async (req, res) => {
   try {
     const { id } = req.params;
-
-    if (!ObjectId.isValid(id)) {
-      return res.status(400).json({ message: 'Invalid business id.' });
-    }
-
-    const validationMessage = validateBusiness(req.body);
-    if (validationMessage) {
-      return res.status(400).json({ message: validationMessage });
-    }
 
     const db = getDb();
     const businessPayload = buildBusinessPayload(req.body);
@@ -116,10 +75,6 @@ const updateBusiness = async (req, res) => {
 const deleteBusiness = async (req, res) => {
   try {
     const { id } = req.params;
-
-    if (!ObjectId.isValid(id)) {
-      return res.status(400).json({ message: 'Invalid business id.' });
-    }
 
     const db = getDb();
     const result = await db.collection('businesses').deleteOne({ _id: new ObjectId(id) });

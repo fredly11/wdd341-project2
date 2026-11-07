@@ -25,6 +25,19 @@ Content-Type: application/json
   "notes": "Planning first storefront launch in Boise."
 }
 
+### POST bad business (missing required fields)
+POST {{localUrl}}/businesses
+Content-Type: application/json
+
+{
+  "name": "",
+  "state": "Id",
+  "einStatus": "in-review"
+}
+
+### GET with bad ObjectId (should return 400)
+GET {{localUrl}}/businesses/not-a-valid-objectid
+
 ### PUT update business
 PUT {{localUrl}}/businesses/{{businessId}}
 Content-Type: application/json
@@ -70,6 +83,19 @@ Content-Type: application/json
   "industry": "Food & Beverage",
   "notes": "Planning first storefront launch in Boise."
 }
+
+### POST bad business (missing required fields)
+POST {{renderUrl}}/businesses
+Content-Type: application/json
+
+{
+  "name": "",
+  "state": "Id",
+  "einStatus": "in-review"
+}
+
+### GET with bad ObjectId (should return 400)
+GET {{renderUrl}}/businesses/not-a-valid-objectid
 
 ### PUT update business
 PUT {{renderUrl}}/businesses/{{renderBusinessId}}
